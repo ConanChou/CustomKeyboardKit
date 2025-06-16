@@ -16,8 +16,7 @@ import SwiftUI
 public class CustomKeyboardBuilder: CustomKeyboard {
     public init(@ViewBuilder customKeyboardView: @escaping ((UITextDocumentProxy, @escaping SubmitHandler, SystemFeedbackHandler?) -> some View)) {
         super.init(nibName: nil, bundle: nil)
-        let onSubmitClosure = { [weak self] in
-            guard let self else { return }
+        let onSubmitClosure = {
             if let onSubmit = self.onSubmit {
                 onSubmit()
             } else {
@@ -37,6 +36,7 @@ public class CustomKeyboardBuilder: CustomKeyboard {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     deinit {
         keyboardView?.removeFromSuperview()
         keyboardView = nil
